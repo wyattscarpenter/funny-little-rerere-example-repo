@@ -176,5 +176,6 @@ $ git g # This is essentially the final state of the repo, which I've already in
 
 # A third time?! 
 
-What happens if I then rebase again?
+What happens if I then rebase again? (not "pictured" in the git repo history) Well, the same thing again, it turns out.
 
+But what if I rebase without --rebase-merges?
