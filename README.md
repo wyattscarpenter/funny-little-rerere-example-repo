@@ -9,6 +9,8 @@ I'm using git version 2.46.2.windows.1
 
 Conclusion: there is something funny going on. Also, daiwai was correct.
 
+I made his commits, and merged them together, manually fixing the conflict so that all changes were respected. I have git rerere enabled, so it recorded this resolution.
+
 I rebased to update the "Update README.md: elaborate on project." commit (6c30b9d, initially), setting that up using git rebase --rebase-merges --root -i
 
  Here's the final state of the project after my experiment, after the rebase, from git log --all --graph --oneline:
@@ -178,4 +180,8 @@ $ git g # This is essentially the final state of the repo, which I've already in
 
 What happens if I then rebase again? (not "pictured" in the git repo history) Well, the same thing again, it turns out.
 
-But what if I rebase without --rebase-merges?
+But what if I rebase again, without --rebase-merges? Also the same.
+
+In all cases, I have to manually fix b.js, with no indication that it's even different, or I get "wrong" code in b.js (it's just the "Refactoring" commit's b.js, no change from "Conflicting Change").
+
+This is arguably a bug in git. Especially the "no indication" part. And the fact that it indicates a.js to me instead. Although, git is arguably comprised entirely of bugs. Also, the git DAG of commits is great, but the way git manipulates this DAG is bizarre — why would changing something in README.md and running the DAG forward from there result in a change in files that are not README.md and not even related to it‽ The answer is, I suppose, that git rebase was, apparently, built to do a very different operation (namely: rebasing (specifically: rebasing feature branches on to master without preserving certain counterproductive things)) and its ability to manipulate the commit DAG à la a time-traveler is tacked-on and hacked-together. And that's why we have this odd rerere system in the first place, and also why it fails.
