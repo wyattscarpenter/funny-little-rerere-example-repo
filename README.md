@@ -174,3 +174,7 @@ $ git g # This is essentially the final state of the repo, which I've already in
 * 2025-03-25 01:46 (Tue) 76bb797 Initial commit <wyattscarpenter>
 ```
 
+# A third time?! 
+
+What happens if I then rebase again?
+
